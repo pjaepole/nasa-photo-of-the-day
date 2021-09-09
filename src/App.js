@@ -3,6 +3,12 @@ import "./App.css";
 import axios from 'axios';
 import { API_KEY } from './constants';
 import Picture from "./components/picture";
+import Title from "./components/title";
+import Date from "./components/date";
+import Explanation from "./components/explanation";
+
+
+
 function App() {
     
     const [picture, setPicture]=useState([]);
@@ -14,7 +20,7 @@ function App() {
 
     
     
-    //getting picture url
+    //getting response.data and  passing data to each component
     useEffect(()=>{
       axios.get(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
       .then(res=>{
@@ -39,13 +45,12 @@ function App() {
       <h1>
         APOD<span role="img" aria-label='go!'>🚀</span>!
       </h1>
-      <h2>Title:{title}</h2>
       
+      <Title title={title}/>
       <Picture picture={picture} />
+      <Date date={date}/>
+      <Explanation explanation={explanation}/>
       
-      
-      <div>date={date}</div>
-      <p>explanation:{explanation}</p>
     </div>
   );
 }
